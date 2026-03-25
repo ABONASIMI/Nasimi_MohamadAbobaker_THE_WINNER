@@ -25,16 +25,22 @@ class Agent7(KartAgent):
 
         target = obs["paths_end"][0] #prendre des x,y,z de pist pour etre au centre 
         steerx = target[0]  #prendre x pour entre en centre 
-        # dist  = obs ["distance_down_track"]
-        # print(dist)
-        acceleration = 0.90
+        dist  = obs ["distance_down_track"]
+        print(dist)
+
+        Break = False
+        if (dist < 200): # si on est on 200 premier 
+            acceleration = 0.90
+        else : #apres 200 pour en marche arriere
+            acceleration = 0.00
+            Break = True
 
 
 
         action = {
             "acceleration": acceleration,
             "steer": steerx,
-            "brake": False, # bool(random.getrandbits(1)),
+            "brake": Break,
             "drift": False,
             "nitro": False,
             "rescue": False,
