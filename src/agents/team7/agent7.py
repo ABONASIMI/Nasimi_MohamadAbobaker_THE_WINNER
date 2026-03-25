@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import math
 
 from utils.track_utils import compute_curvature, compute_slope
 from agents.kart_agent import KartAgent
@@ -11,7 +12,7 @@ class Agent7(KartAgent):
         self.agent_positions = []
         self.obs = None
         self.isEnd = False
-        self.name = "Team7" # replace with your chosen name
+        self.name = "Nasimi Mohamad Abobaker" # replace with your chosen name
 
     def reset(self):
         self.obs, _ = self.env.reset()
@@ -21,15 +22,26 @@ class Agent7(KartAgent):
         return self.isEnd
 
     def choose_action(self, obs):
-        acceleration = random.random()
-        steering = random.random()
+
+        target = obs["paths_end"][0] #prendre des x,y,z de pist pour etre au centre 
+        steerx = target[0]  #prendre x pour entre en centre 
+        # dist  = obs ["distance_down_track"]
+        # print(dist)
+        acceleration = 0.90
+
+
+
         action = {
             "acceleration": acceleration,
-            "steer": steering,
+            "steer": steerx,
             "brake": False, # bool(random.getrandbits(1)),
-            "drift": bool(random.getrandbits(1)),
-            "nitro": bool(random.getrandbits(1)),
-            "rescue":bool(random.getrandbits(1)),
-            "fire": bool(random.getrandbits(1)),
+            "drift": False,
+            "nitro": False,
+            "rescue": False,
+            "fire": False,
         }
         return action
+
+
+
+
